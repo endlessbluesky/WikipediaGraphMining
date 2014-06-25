@@ -1,0 +1,30 @@
+import graphlab
+import MySQLdb as mysql
+import stop_watch
+
+#create a database connection object
+#type(db) = MySQLdb.connections.Connection
+db = mysql.connect(host = 'localhost',
+                   user = 'gaoyuan',
+                   passwd = 'gaoyuan',
+                   db = 'gaoyuan_wikipedia')
+
+#get a cursor of the selected database
+cur = db.cursor()
+stop_watch.reset()
+stop_watch.start()
+cur.execute('SELECT * FROM pagelinks LIMIT 10')
+stop_watch.stop()
+print('time cost for loading sql data = ' + str(stop_watch.getTimeElapsedInSeconds()))
+
+wiki_graph = graphlab.SGraph()
+list_of_page_links = 
+
+################################
+#in the table pagelinks,
+#one single record (row, pagelink, etc.) look something like this:
+#(12L, 0L, 'Anarchism_in_Cuba'), where
+#12 is the '_id' of the page, 'Anarchism_in_Cuba' is the
+#title of the target page of the link
+################################
+
